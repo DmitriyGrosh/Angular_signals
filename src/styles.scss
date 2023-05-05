@@ -3,6 +3,8 @@
 * {
   margin: 0;
   padding: 0;
+  background: #212529;
+  color: white;
 }
 
 :root {
@@ -100,8 +102,17 @@ input {
 }
 
 span {
-  font-size: 50px;
+  font-size: 15px;
   color: rgb(3, 102, 214);
+}
+
+.welcome {
+  max-height: 100vh;
+  height: 100vh;
+}
+
+.scroll {
+  overflow: auto;
 }
 
 .flex {

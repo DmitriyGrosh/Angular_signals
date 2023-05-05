@@ -1,21 +1,26 @@
-<h2>Signal</h2>
+<div class="col-12">
+  <div class="row">
+    <!-- Logs -->
+    <div class="col-6 scroll">
+      <div *ngFor="let log of logs$ | async">
+        <span [ngClass]="log.type">{{ log.message }}</span>
+      </div>
+    </div>
 
-<div class="flex flex__column flex__gap-md">
-  <div class="flex flex__center-center">
-    <span>{{ message() }}</span>
-  </div>
-
-  <!-- Logs -->
-  <div class="col-6">
-    <div *ngFor="let log of logs$ | async">
-      <span [ngClass]="log.type">{{ log.message }}</span>
+    <!-- Control -->
+    <div class="col-6">
+      <input type="text" [value]="name()" (input)="changeName($event)" class="form-control" />
+      <option [data]="todos$ | async"></option>
     </div>
   </div>
-
-  <!-- Control -->
-  <div class="col-6">
-    <input type="text" [value]="name()" (input)="changeName($event)" class="form-control" />
-    <option [data]="todos$ | async"></option>
-  </div>
-
 </div>
+<!--<h2>Signal</h2>-->
+
+<!--<div class="">-->
+<!--  <div class="">-->
+<!--    <span>{{ message() }}</span>-->
+<!--  </div>-->
+
+
+
+<!--</div>-->

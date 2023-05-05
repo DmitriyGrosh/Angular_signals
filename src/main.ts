@@ -10,9 +10,11 @@ import { SignalComponent } from './components/signal/signal.component';
   imports: [CommonModule, SignalComponent],
   template: `
     <div id="root">
-      <h1>Hello from {{name}} with signals!</h1>
+      <div class="welcome">
+        <h1>Hello from {{name}} with signals!</h1>
 
-      <signal-autocomplete></signal-autocomplete>
+        <signal-autocomplete></signal-autocomplete>
+      </div>
     </div>
   `,
 })
