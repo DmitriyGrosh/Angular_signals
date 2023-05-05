@@ -1,7 +1,13 @@
 <div class="col-12">
   <div class="row">
     <!-- Logs -->
-    <div class="col-6 scroll">
+<!--    <div class="col-6 scroll">-->
+<!--      <div *ngFor="let log of logs$ | async">-->
+<!--        <span [ngClass]="log.type">{{ log.message }}</span>-->
+<!--      </div>-->
+<!--    </div>-->
+
+    <div class="col-6">
       <div *ngFor="let log of logs$ | async">
         <span [ngClass]="log.type">{{ log.message }}</span>
       </div>

@@ -7,7 +7,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Observable, map, tap, switchMap } from 'rxjs';
+import { Observable, map, tap, switchMap, catchError } from 'rxjs';
 import { toSignal, toObservable } from '@angular/core/rxjs-interop';
 import { OptionComponent } from '../option/option.component';
 import { sleep } from "../../lib/sleep";
@@ -29,7 +29,7 @@ export class SignalComponent {
   // `computed`: create a signal of computed value (readonly)
   public message = computed(() => `Hello ${this.name()}!`);
   public todos$ = toObservable(this.name).pipe(
-    tap((value: string) => this._logger.log(value)),
+    tap((value: string) => this._logger.log(`[ENTER] ${value}`)),
     // map(() => []),
     switchMap((value: string) => this._longRequest$(value))
   );
@@ -46,10 +46,14 @@ export class SignalComponent {
   private _longRequest$(value: string): Observable<string[]> {
     return this._http.get('https://jsonplaceholder.typicode.com/todos').pipe(
       tap((value: any) => sleep(1000, this._logger)),
+      catchError(() => {
+        this._logger.log('[INTERRUPTION] request interrupted', 'error');
+        return [];
+      }),
       map((todos: any[]) =>
         todos.map(() => Math.floor(Math.random() * 100).toString()).slice(0, 15)
       ),
-      tap((items: any) => this._logger.log('END long request'))
+      tap((items: any) => this._logger.log(' === END LONG REQUEST')),
     );
   }
 }
